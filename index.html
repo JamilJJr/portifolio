@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Jamil J. Jr. - Portifólio</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #007BFF;
+      display: flex;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      padding: 15px 20px;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    nav a:hover {
+      background-color: #0056b3;
+    }
+
+    .spacer {
+      height: 60px;
+    }
+
+    .container {
+      position: relative;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    section:target {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    .container:not(:has(:target)) #sobremim,
+    #sobremim:target {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+      position: relative;
+    }
+
+    h2 {
+      color: #333;
+    }
+
+    p, li {
+      color: #555;
+      text-align: justify;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    ul li {
+      margin-bottom: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Menu de navegação -->
+  <nav>
+    <a href="#sobremim">Sobre Mim</a>
+    <a href="#formacao">Formação</a>
+    <a href="#portifolio">Portifólio</a>
+    <a href="#contato">Contato</a>
+  </nav>
+
+  <div class="spacer"></div>
+
+  <!-- Conteúdo -->
+  <div class="container">
+    <section id="sobremim">
+      <h2>Sobre Mim</h2>
+      <p>Meu nome é Jamil José Júnior, tenho 54 anos, sou natural da cidade de Santos e atuo na área de Tecnologia da Informação há mais de 30 anos, com sólida experiência na gestão de projetos voltados para e-commerce, comunicação digital e desenvolvimento de serviços online.</p>
+
+      <p>Iniciei minha trajetória profissional ainda durante o curso técnico em Processamento de Dados, em 1990, e desde então venho acumulando experiência prática e exercendo liderança em projetos inovadores. Atuei como professor de informática por seis anos na rede S.O.S. Computadores e, em 2000, tornei-me sócio e gestor de uma empresa de tecnologia especializada em soluções para o comércio eletrônico.</p>
+
+      <p>Essa empresa foi um dos marcos da minha carreira, onde adquirimos 51% do site @balada (www.abalada.com), um site local de eventos que passou por uma reestruturação e se transformou em um portal com milhões de acessos diários. O projeto também deu origem a um programa de TV exibido pela emissora de TV Bandeirantes, combinando tecnologia, produção de conteúdo e comunicação, e alcançando grande audiência em diversas regiões do Estado de São Paulo.</p>
+
+      <p>Com o encerramento dessa empresa, em 2004, ingressei como professor na Escola Técnica Treinasse e retornei ao mercado de TI, atuando na gestão de projetos voltados ao desenvolvimento de serviços online.</p>
+
+      <p>Desde 2008, trabalho como Assessor de Imprensa e TI em uma instituição filantrópica em Santos, integrando minha experiência nas áreas de tecnologia e comunicação. Em paralelo, desenvolvo um novo projeto voltado à prestação de serviços digitais.</p>
+    </section>
+
+    <section id="formacao">
+      <h2>Formação</h2>
+
+      <h3>Formação Acadêmica</h3>
+      <p><strong>Curso Superior Incompleto</strong><br>
+      Instituição: FEI – Faculdade de Engenharia Industrial<br>
+      Curso: Engenharia Elétrica Eletrônica Industrial com Ênfase em Telecomunicações</p>
+
+      <p>O curso abrange diversas áreas relacionadas à informática e eletrônica, incluindo:</p>
+      <ul>
+        <li>Projetos de redes locais e redes ponto a ponto (via satélite)</li>
+        <li>Automação industrial (desenvolvimento e criação)</li>
+        <li>Projetos elétricos de sistemas</li>
+        <li>Ênfase em tecnologias de telecomunicações</li>
+      </ul>
+
+      <h3>Síntese de Qualificações</h3>
+      <ul>
+        <li>Técnico em Processamento de Dados, com mais de 30 anos de experiência em:
+          <ul>
+            <li>Programação</li>
+            <li>Análise de sistemas</li>
+            <li>Projetos de automação comercial</li>
+          </ul>
+        </li>
+        <li>Administrador de empresa atuando nas áreas de tecnologia, comunicação e eventos</li>
+        <li>Diretor e produtor de programa de TV, com foco em entretenimento</li>
+        <li>Produtor de shows e eventos culturais e corporativos</li>
+        <li>Experiência em marketing e campanhas publicitárias</li>
+        <li>Especialista em criação de Planos de Negócios (Business Plan):
+          <ul>
+            <li>Técnicas e metodologias voltadas à estruturação de novos empreendimentos na área de TI</li>
+            <li>Pesquisa e elaboração de projetos para apresentação a investidores (Venture Capital)</li>
+            <li>Certificação pelo SEBRAE</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+
+    <section id="portifolio">
+      <h2>Portifólio</h2>
+      <p>Aqui você encontrará meus projetos mais recentes, incluindo sites, aplicações web e sistemas personalizados.</p>
+    </section>
+
+    <section id="contato">
+      <h2>Contato</h2>
+      <p>Entre em contato pelo e-mail: <strong>jamiljjr@gmail.com</strong>.</p>
+    </section>
+  </div>
+
+</body>
+</html>
