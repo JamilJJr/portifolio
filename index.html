@@ -8,14 +8,15 @@
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #fafafa;
+      background: url('fundo_azul_cinza.jpg') repeat-y center top;
+      background-size: 100% auto;
     }
 
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background-color: #007BFF;
+      background-color: #08639d;
       display: flex;
       justify-content: center;
       z-index: 1000;
@@ -25,11 +26,12 @@
       color: white;
       padding: 15px 20px;
       text-decoration: none;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
 
     nav a:hover {
-      background-color: #0056b3;
+      background-color: #013856;
+      transform: scale(1.2);
     }
 
     .spacer {
@@ -85,6 +87,53 @@
     ul li {
       margin-bottom: 8px;
     }
+
+    /* Estilo do formulário flutuante */
+    .form-box {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      max-width: 500px;
+      margin: 30px auto;
+    }
+
+    .form-box label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .form-box input,
+    .form-box textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    .form-box textarea {
+      height: 120px;
+      resize: vertical;
+    }
+
+    .form-box button {
+      background-color: #007BFF;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .form-box button:hover {
+      background-color: #0056b3;
+    }
   </style>
 </head>
 <body>
@@ -103,7 +152,7 @@
   <div class="container">
     <section id="sobremim">
       <h2>Sobre Mim</h2>
-      <p>Meu nome é Jamil José Júnior, tenho 54 anos, sou natural da cidade de Santos e atuo na área de Tecnologia da Informação há mais de 30 anos, com sólida experiência na gestão de projetos voltados para e-commerce, comunicação digital e desenvolvimento de serviços online.</p>
+      <p>Meu nome é Jamil José Júnior, tenho <span id="idade"></span> anos, sou natural da cidade de Santos e atuo na área de Tecnologia da Informação há mais de 30 anos, com sólida experiência na gestão de projetos voltados para e-commerce, comunicação digital e desenvolvimento de serviços online.</p>
 
       <p>Iniciei minha trajetória profissional ainda durante o curso técnico em Processamento de Dados, em 1990, e desde então venho acumulando experiência prática e exercendo liderança em projetos inovadores. Atuei como professor de informática por seis anos na rede S.O.S. Computadores e, em 2000, tornei-me sócio e gestor de uma empresa de tecnologia especializada em soluções para o comércio eletrônico.</p>
 
@@ -155,14 +204,70 @@
 
     <section id="portifolio">
       <h2>Portifólio</h2>
-      <p>Aqui você encontrará meus projetos mais recentes, incluindo sites, aplicações web e sistemas personalizados.</p>
+      <p>Nesta seção, compartilho projetos que refletem minha jornada entre a comunicação, o marketing e a tecnologia — conexões criativas que contam um pouco da minha história.</p>
+      
+      <h3>Programa e Site @balada</h3>
+
+      <h4>Briefing @balada</h4>
+      <video controls style="width:100%;border-radius:10px;margin-bottom:20px;">
+        <source src="abalada.MP4" type="video/mp4">
+        Seu navegador não suporta a reprodução de vídeo.
+      </video>
+
+      <h4>A Balada, Lucky Scope - Entrevista</h4>
+      <video controls style="width:100%;border-radius:10px;margin-bottom:20px;">
+        <source src="abalada_JJJr.MP4" type="video/mp4">
+        Seu navegador não suporta a reprodução de vídeo.
+      </video>
+
+      <h4>A Balada, Lucky Scope - Nova Pista de Techno e SushiBar</h4>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
+        <iframe src="https://www.youtube.com/embed/55GNR17RGEo?start=680" 
+                title="A Balada, Lucky Scope - Nova Pista de Techno e SushiBar" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+
+      <h4>A Balada, Breezy - Festa Smirnoff e Sirena Maresias - Festa do Branco</h4>
+      <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
+        <iframe src="https://www.youtube.com/embed/AuHg8wLQ5q4" 
+                title="A Balada, Breezy - Festa Smirnoff e Sirena Maresias - Festa do Branco" 
+                style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+                frameborder="0" allowfullscreen></iframe>
+      </div>
+
     </section>
 
     <section id="contato">
       <h2>Contato</h2>
-      <p>Entre em contato pelo e-mail: <strong>jamiljjr@gmail.com</strong>.</p>
+      <div class="form-box">
+        <form action="mailto:jamiljjr@gmail.com" method="post" enctype="text/plain">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required>
+
+          <label for="email">E-mail:</label>
+          <input type="email" id="email" name="email" required>
+
+          <label for="mensagem">Mensagem:</label>
+          <textarea id="mensagem" name="mensagem" required></textarea>
+
+          <button type="submit">Enviar</button>
+        </form>
+      </div>
     </section>
   </div>
+
+  <!-- Script para calcular a idade -->
+  <script>
+    (function() {
+      const nascimento = new Date(1971, 2, 13); // Março (mês 2 no JS)
+      const hoje = new Date();
+      let idade = hoje.getFullYear() - nascimento.getFullYear();
+      const aniversarioEsteAno = new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate());
+      if (hoje < aniversarioEsteAno) idade--;
+      document.getElementById("idade").textContent = idade;
+    })();
+  </script>
 
 </body>
 </html>
