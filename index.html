@@ -208,6 +208,43 @@ section:target {
       margin: 0;
     }
 
+    /* Estilo da caixa da mensagem flutuante (inicialmente escondida) */
+    #mensagem-sucesso {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.6); /* Fundo escurecido */
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .mensagem-box {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .mensagem-box button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-weight: bold;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .mensagem-box button:hover {
+        background-color: #0056b3;
+    }
+
   </style>
 </head>
 <body>
@@ -415,32 +452,41 @@ section:target {
 
     <!-- Seção de Contato da página - Formulário -->
     <section id="contato">
-      <!-- Imagem decorativa de contato, com largura total ajustada até no máximo 800px -->
-      <img src="contato.png" alt="Contato" style="width:100%; max-width:800px; margin-bottom:20px;">
-      <!-- Caixa que envolve o formulário -->
-      <div class="form-box">
-        <!-- Início do formulário de contato -->
-        <form action="https://formsubmit.co/jamiljjr@gmail.com" method="POST">
-           <!-- Anti-spam -->
-           <input type="hidden" name="_captcha" value="false">
-           <input type="hidden" name="_subject" value="Nova mensagem do meu portifólio!">
-           <!-- Redirecionamento após envio -->
-           <input type="hidden" name="_next" value="https://jamiljjr.github.io/portifolio/ ">
-          <!-- Início dos Campos de entrada do formulário -->
-           <label for="nome">Nome:</label>
-           <input type="text" id="nome" name="nome" required>
+        <!-- Imagem decorativa de contato, com largura total ajustada até no máximo 800px -->
+        <img src="contato.png" alt="Contato" style="width:100%; max-width:800px; margin-bottom:20px;">
+  
+        <!-- Caixa que envolve o formulário -->
+        <div class="form-box">
+            <!-- Início do formulário de contato -->
+            <form id="form-contato" action="https://formsubmit.co/jamiljjr@gmail.com" method="POST">
+                <!-- Anti-spam -->
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="Nova mensagem do meu portifólio!">
 
-           <label for="email">E-mail:</label>
-           <input type="email" id="email" name="email" required>
+                <!-- Início dos Campos de entrada do formulário -->
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" required>
 
-           <label for="mensagem">Mensagem:</label>
-           <textarea id="mensagem" name="mensagem" required></textarea>
-           
-           <!-- Botão para enviar o formulário -->
-           <button type="submit">Enviar</button>
-        </form>
-      </div>
+                <label for="email">E-mail:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="mensagem">Mensagem:</label>
+                <textarea id="mensagem" name="mensagem" required></textarea>
+      
+                <!-- Botão para enviar o formulário -->
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+
+        <!-- Caixa da mensagem flutuante (inicialmente escondida) -->
+        <div id="mensagem-sucesso" style="display: none;">
+            <div class="mensagem-box">
+                <p>Mensagem enviada com sucesso!</p>
+                <button id="botao-prosseguir">PROSSIGA</button>
+            </div>
+        </div>
     </section>
+   
   </div>
 
   <!-- Script para calcular a idade, para que a minha idade esteja sempre atualizada na seção: "Sobre Mim" -->
@@ -462,6 +508,49 @@ section:target {
     })();
   </script>
   
+  
+  // Mensagem flutuante após o envio
+  <script>
+     document.addEventListener("DOMContentLoaded", function () {
+        // Referência ao formulário e à mensagem flutuante
+        const form = document.getElementById("form-contato");
+        const mensagemSucesso = document.getElementById("mensagem-sucesso");
+        const botaoProsseguir = document.getElementById("botao-prosseguir");
+
+        // Intercepta o envio do formulário
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Impede envio automático
+
+            const formData = new FormData(form);
+
+            fetch(form.action, {
+                method: "POST",
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+            })
+      
+            .then(response => {
+            if (response.ok) {
+              // Exibe a mensagem de sucesso
+              mensagemSucesso.style.display = "flex";
+              form.reset(); // Limpa o formulário
+            } else {
+              alert("Erro ao enviar a mensagem. Por favor, tente novamente.");
+            }
+          })
+      
+          .catch(error => {
+              alert("Erro de conexão. Tente novamente mais tarde.");
+          });
+        });
+
+        // Redireciona quando o botão "PROSSIGA" for clicado
+        botaoProsseguir.addEventListener("click", function () {
+            window.location.href = "https://jamiljjr.github.io/portifolio/";
+        });
+      });
+  </script>
+
   <!-- Rodapé da página com direitos autorais -->
   <footer class="footer">
       <p class="footer-text">© 2025 Copyright  .:.  By Jamil J. Jr.</p>
