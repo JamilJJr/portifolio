@@ -508,37 +508,40 @@ section:target {
     })();
   </script>
   
-  
-  // Mensagem flutuante após o envio
+  <!-- Verificação do envio do formulário -->
   <script>
+     // Espera todo o conteúdo da página carregar antes de executar o código
      document.addEventListener("DOMContentLoaded", function () {
-        // Referência ao formulário e à mensagem flutuante
+        // Pega o formulário da página
         const form = document.getElementById("form-contato");
+        // Pega o elemento onde a mensagem de sucesso será exibida
         const mensagemSucesso = document.getElementById("mensagem-sucesso");
+        // Pega o botão que será usado para prosseguir após o envio
         const botaoProsseguir = document.getElementById("botao-prosseguir");
 
         // Intercepta o envio do formulário
         form.addEventListener("submit", function (event) {
             event.preventDefault(); // Impede envio automático
-
+            // Pega os dados do formulário
             const formData = new FormData(form);
-
+            // Envia os dados do formulário usando uma requisição POST
             fetch(form.action, {
                 method: "POST",
                 body: formData,
                 headers: { 'Accept': 'application/json' }
             })
-      
+            // Se o envio for bem-sucedido
             .then(response => {
             if (response.ok) {
               // Exibe a mensagem de sucesso
               mensagemSucesso.style.display = "flex";
               form.reset(); // Limpa o formulário
             } else {
+              // Se houver erro no envio, mostra alerta
               alert("Erro ao enviar a mensagem. Por favor, tente novamente.");
             }
           })
-      
+          // Se houver problema de conexão com o servidor
           .catch(error => {
               alert("Erro de conexão. Tente novamente mais tarde.");
           });
