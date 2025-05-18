@@ -1,161 +1,218 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-BR">  
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Jamil J. Jr. - Portifólio</title>
+    
+  <!-- Formatações CSS - Aplicando os estilos -->
+
   <style>
+    /* Imagem de fundo das páginas */
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: url('fundo_azul_cinza.jpg') repeat-y center top;
-      background-size: 100% auto;
+      margin: 0;  /* Remove margens padrão do navegador */
+      font-family: Arial, sans-serif; /* Definindo a fonte principal */
+      background: url('fundo_azul_cinza.jpg') repeat-y center top; /* Aplicando uma imagem de fundo que se repete na vertical e centralizada no topo */
+      /* background-size: 100% auto; */
+      background-size: cover;
+      background-attachment: fixed;
+      /* A imagem de fundo vai ocupar 100% da largura, com altura automática */
     }
 
+    /* Estilizando a barra de navegação */
     nav {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background-color: #08639d;
-      display: flex;
-      justify-content: center;
-      z-index: 1000;
+      position: fixed;  /* Fixando a barra no topo da página */
+      top: 0; /* Alinhamento no topo */
+      width: 100%; /* Ocupando toda a largura */
+      background-color: #08639d;  /* Definindo que a Cor de fundo é azul */
+      display: flex; /* Ativa um layout flexível para os links */
+      justify-content: center; /* Centralizando os itens na horizontal */
+      z-index: 1000; /* Garantindo que fique acima de outros elementos */
     }
 
+    /* Estilo dos links de navegação */
     nav a {
-      color: white;
-      padding: 15px 20px;
-      text-decoration: none;
-      transition: background 0.3s, transform 0.3s;
+      color: white; /* Cor do texto branca */
+      padding: 15px 20px; /* Espaçamento interno */
+      text-decoration: none; /* Remove sublinhado */
+      transition: background 0.3s, transform 0.3s; /* Efeito suave ao passar o mouse */
     }
 
+    /* Efeito ao passar o mouse sobre os links de navegação */
     nav a:hover {
-      background-color: #013856;
-      transform: scale(1.2);
+      background-color: #013856; /* Altera a cor de fundo */
+      transform: scale(1.2); /* Aumenta o tamanho em 20% */
     }
-
+    
+    /* Espaçamento para compensar a barra de navegação fixa */
     .spacer {
-      height: 60px;
+      height: 60px; /* Altura do espaçamento */
     }
 
+    /* Container geral dos conteúdos */
     .container {
       position: relative;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
+      max-width: 800px; /* Largura máxima do conteúdo */
+      margin: 0 auto; /* Centraliza horizontalmente */
+      padding: 20px; /* Espaçamento interno */
     }
 
-    section {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      pointer-events: none;
-    }
+    /* Estilo base para cada seção da página */
+section {
+  display: none;                /* Oculta todas as seções por padrão */
+  opacity: 0;                   /* Esconde visualmente */
+  transform: translateY(30px);  /* Efeito de entrada */
+  transition: opacity 1s ease, transform 1s ease;
+  pointer-events: none;         /* Impede interações enquanto invisível */
+}
 
-    section:target {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-      position: relative;
-    }
+/* Exibe a seção correspondente ao ID na URL (#contato, por exemplo) */
+section:target {
+  display: block;               /* Torna visível */
+  opacity: 1;
+  transform: translateY(0);     /* Move para posição original */
+  pointer-events: auto;         /* Permite interações */
+}
 
-    .container:not(:has(:target)) #sobremim,
-    #sobremim:target {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-      position: relative;
-    }
+/* Mostra "Sobre Mim" se nenhuma seção for alvo (:target não presente) */
+.container:not(:has(:target)) #sobremim {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
+    /* Título principal das seções */
     h2 {
       color: #333;
     }
 
+    /* Parágrafos e itens de lista */
     p, li {
       color: #555;
-      text-align: justify;
+      text-align: justify; 
     }
 
+    /* Estiliza listas não ordenadas */
     ul {
-      margin-left: 20px;
+      margin-left: 20px; /* Indenta a lista */
     }
-
+    /* Espaço entre itens da lista */
     ul li {
       margin-bottom: 8px;
     }
 
     /* Estilo do formulário flutuante */
     .form-box {
-      background-color: rgba(255, 255, 255, 0.95);
-      padding: 20px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-      max-width: 500px;
-      margin: 30px auto;
+      background-color: rgba(255, 255, 255, 0.95); /* Fundo branco com leve transparência */
+      padding: 20px; /* Espaçamento interno */
+      border-radius: 15px; /* Cantos arredondados */
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);  /* Sombra ao redor da caixa */
+      max-width: 500px; /* Largura máxima */
+      margin: 30px auto; /* Centraliza e dá espaço em cima/baixo */
     }
 
+    /* Estilo dos rótulos do formulário (ex: "Nome", "Email") */
     .form-box label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: bold;
+      display: block; /* Cada rótulo ocupa uma linha inteira */
+      margin-bottom: 6px; /* Espaço abaixo do rótulo */
+      font-weight: bold; 
       color: #333;
     }
-
+    
+    /* Campos de entrada de texto e área de texto */
     .form-box input,
     .form-box textarea {
-      width: 100%;
+      width: 100%;  /* Ocupa toda a largura da caixa */
       padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
+      margin-bottom: 15px; /* Espaço entre campos */
+      border: 1px solid #ccc; /* Borda cinza clara */
+      border-radius: 8px; /* Cantos arredondados */
       font-size: 14px;
     }
 
+    /* Altura personalizada para textarea, permitindo redimensionamento vertical */
     .form-box textarea {
-      height: 120px;
-      resize: vertical;
+      height: 120px; /* Altura inicial */
+      resize: vertical; /* Pode aumentar ou diminuir verticalmente */
     }
 
+    /* Botão do formulário */
     .form-box button {
       background-color: #007BFF;
       color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
+      padding: 10px 20px; /* Tamanho do botão */
+      border: none; /* Sem borda */
+      border-radius: 8px; /* Cantos arredondados */
       font-size: 16px;
-      cursor: pointer;
-      transition: background 0.3s;
+      cursor: pointer; /* Mostra a mãozinha ao passar o mouse */
+      transition: background 0.3s; /* Animação suave ao mudar a cor */
     }
 
+    /* Efeito hover no botão */
     .form-box button:hover {
       background-color: #0056b3;
     }
 
-    .titulo-portifolio {
+    /* Estilo de título da seção */
+    .titulo-diferenciado {
       font-size: 2em;
-      border-bottom: 3px solid #050505;
+      border-bottom: 3px solid #0672c5;
       padding-bottom: 10px;
       margin-bottom: 15px;
-      color: #090909;
+      color: #0065b2;
     }
 
-    .introducao-portifolio {
-      background-color: #e9f5ff;
-      border-left: 5px solid #007BFF;
+    /* Estilo do bloco de introdução */
+    .introducao-diferenciada {
+      background-color: #e9f5ff; /* Azul claro */
+      border-left: 5px solid #007BFF; /* Barra azul na lateral esquerda */
       padding: 15px 20px;
       margin-bottom: 30px;
-      border-radius: 8px;
+      border-radius: 8px; /* Cantos arredondados */
+    }
+
+    /* Linha com efeito para separar conteúdos */
+    .linha-diferenciada {
+      border: none;             /* Remove a borda padrão */
+      height: 3px;              /* Define a espessura */
+      background: linear-gradient(to right, #007BFF, #00FFC8); /* Degradê colorido */
+      margin: 30px 0;           /* Espaçamento vertical */
+      border-radius: 5px;       /* Cantos arredondados */
+    }
+
+    /* Linha com efeito para separar conteúdos - mais alta */
+    .linha-diferenciada2 {
+      border: none;             /* Remove a borda padrão */
+      height: 16px;              /* Define a espessura */
+      background: linear-gradient(to right, #007BFF, #00FFC8); /* Degradê colorido */
+      margin: 30px 0;           /* Espaçamento vertical */
+      border-radius: 5px;       /* Cantos arredondados */
+    }
+
+    .footer { 
+      position: fixed; /* Fixa o rodapé na parte inferior da tela */
+      bottom: 0;
+      left: 0;
+      width: 100%;  /* Ocupa toda a largura da tela */
+      background-color: #08639d;
+      padding: 10px 0; 
+      z-index: 1000; /* Fica acima de outros elementos */
+    }
+
+     /* Estilo e posição do Texto do Rodapé */
+    .footer-text {
+      color: white;
+      text-align:center;
+      font-size: 10px;
+      margin: 0;
     }
 
   </style>
 </head>
 <body>
 
-  <!-- Menu de navegação -->
+  <!-- Menu de navegação fixo no topo -->
   <nav>
     <a href="#sobremim">Sobre Mim</a>
     <a href="#formacao">Formação</a>
@@ -167,9 +224,13 @@
 
   <!-- Conteúdo -->
   <div class="container">
+    
+    <!-- Seção "Sobre Mim" com breve descrição -->
     <section id="sobremim">
+      <!-- Imagem decorativa Sobre Mim com minha foto e largura total ajustada até no máximo 800px -->
       <img src="SobreMim.png" alt="Sobre Mim" style="width:100%; max-width:800px; margin-bottom:20px;">
-      <h2>Sobre Mim</h2>
+      <h2 class="titulo-diferenciado">Sobre Mim</h2><br>
+      
       <p>Olá!, eu sou Jamil José Júnior, natural de Santos e apaixonado por tecnologia. Tenho <span id="idade"></span> anos e atuo na área de Tecnologia da Informação há mais de 30 anos. Minha trajetória é marcada pela liderança de projetos que impulsionam negócios no universo digital — de e-commerce a soluções inovadoras em comunicação online.</p>
 
       <p>Também integrei minha atuação no setor de Tecnologia da Informação ao mercado de comunicação, marketing e entretenimento, conduzindo projetos que uniram soluções digitais a estratégias de conteúdo e experiências ao vivo. Estive à frente da criação e coordenação de sites e plataformas digitais voltadas para eventos, bem como na idealização, produção executiva e direção de programas de televisão, shows, eventos corporativos e campanhas publicitárias. Minha trajetória me permitiu transitar entre os bastidores e o palco, sempre com uma visão estratégica, criativa e orientada para resultados, conectando marcas, público e plataformas através de narrativas envolventes, experiências memoráveis e soluções inovadoras em comunicação integrada.</p>
@@ -184,100 +245,53 @@
 
       <p>Com o encerramento dessa empresa, em 2004, ingressei como professor na Escola Técnica Treinasse e retornei ao mercado de TI, atuando na gestão de projetos voltados ao desenvolvimento de serviços online.</p>
 
-      <p>Desde 2008, trabalho como Assessor de Imprensa e TI em uma instituição filantrópica em Santos, integrando minha experiência nas áreas de tecnologia e comunicação. Em paralelo, desenvolvo um novo projeto voltado à prestação de serviços digitais.</p>
+      <p>Desde 2008, venho integrando tecnologia e comunicação de forma estratégica, atuando como Assessor de Imprensa e TI em uma instituição filantrópica de Santos que oferece atendimento gratuito a crianças e jovens com deficiência intelectual nas áreas de Educação, Saúde e Assistência Social.</p>
+
+      <p>Nesse papel híbrido, conecto o universo da informação à inovação, liderando iniciativas que vão desde a gestão da imagem institucional até o desenvolvimento de soluções tecnológicas internas, otimizando processos administrativos e fortalecendo a atuação da entidade. Também participo diretamente da viabilização de compras por meio de emendas parlamentares destinadas aos projetos da instituição, conduzindo a aquisição de equipamentos de ponta e recursos digitais — sempre com o foco em aprimorar os serviços prestados à comunidade, promovendo impacto social e inclusão digital.</p>
+
+      <p>Paralelamente, lidero o Infinitoonline, um projeto autoral e visionário que nasce da convergência entre tecnologia, experiência do usuário e novas possibilidades de negócio. Atualmente em fase de reestruturação, trata-se de um ecossistema digital em desenvolvimento, alinhado a tendências como inteligência artificial generativa, Web 4.0, APIs inteligentes e plataformas omnichannel, com o propósito de reinventar e criar novos serviços, com experiências imersivas, fluidas e centradas no usuário. Por ora, mantenho os detalhes sob sigilo estratégico, mas posso afirmar que o projeto representa uma nova forma de pensar o digital.</p>
+      <br><br>
     </section>
-
+    
+    <!-- Seção de Formação Acadêmica -->
     <section id="formacao">
-
+      
+      <!-- Imagem decorativa Formação com largura total ajustada até no máximo 800px -->
       <img src="formacao.png" alt="Formação" style="width:100%; max-width:800px; margin-bottom:20px;">
+      <h2 class="titulo-diferenciado">Formação Acadêmica</h2><br>
 
-      <h2>Formação</h2>
-
-      <h3>Formação Acadêmica</h3>
-
-      <p><strong>Curso Superior ─ Em andamento</strong><br>
+      <p><strong>Curso Superior ─ Em andamento<br>
       Instituição: Centro Universitário Internacional UNINTER<br>
-      Curso: Bacharelado em Ciência da Computação</p>
+      Curso: Bacharelado em Ciência da Computação</strong></p>
 
-      <p>O curso tem uma formação ampla e profunda, preparando atuar tanto em áreas teóricas quanto práticas da computação. Focando formar profissionais com forte base em lógica, matemática, algoritmos, programação, sistemas computacionais e inovação tecnológica.</p>
-      <p>Áreas de atuação:</p>
-      <ul>
-        <li>Desenvolvimento de Software
-          <ul>
-             <li>Criando aplicativos, sistemas web, mobile, jogos, softwares empresariais.</li>
-          </ul>
-        </li>
-        <li>Engenharia de Software
-          <ul>
-             <li>Projetando, gerenciando e mantendo sistemas complexos e escaláveis.</li>
-          </ul>
-        </li>
-        <li>Administração de Banco de Dados
-          <ul>
-             <li>Modelando, otimizando e gerenciando dados para empresas.</li>
-          </ul>
-        </li>
-        <li>Redes e Infraestrutura de TI
-          <ul>
-             <li>Gerindo redes, servidores, segurança cibernética, computação em nuvem.</li>
-          </ul>
-        </li>
-        <li>Inteligência Artificial e Machine Learning
-          <ul>
-             <li>Criando modelos de IA, análise preditiva, reconhecimento de padrões.</li>
-          </ul>
-        </li>
-        <li>Ciência de Dados (Data Science)
-          <ul>
-             <li>Extraindo insights de grandes volumes de dados (Big Data, BI).</li>
-          </ul>
-        </li>
-        <li>Computação Gráfica e Realidade Virtual/Aumentada
-          <ul>
-             <li>Desenvolvendo ambientes 3D, animações, simulações, VR/AR.</li>
-          </ul>
-        </li>
-        <li>Pesquisa e Desenvolvimento (P&D)
-          <ul>
-             <li>Trabalhando em centros de pesquisa, universidades, empresas de inovação.</li>
-          </ul>
-        </li>
-        <li>Consultoria e Auditoria em TI
-          <ul>
-             <li>Atuando em projetos de análise, segurança, melhorias de sistemas.</li>
-          </ul>
-        </li>
-        <li>Empreendedorismo em Tecnologia
-          <ul>
-             <li>Criando startups, produtos digitais ou soluções inovadoras.</li>
-          </ul>
-        </li>
-        <li>Docência e Carreira Acadêmica
-          <ul>
-             <li>Atuando como professor, pesquisador, desenvolvedor acadêmico.</li>
-          </ul>
-        </li>
-      </ul>
+      <p>O curso de Bacharelado em Ciência da Computação da UNINTER oferece uma formação sólida e abrangente, capacitando o profissional para atuar de forma estratégica e técnica em diversas áreas da computação. Com base em fundamentos como lógica, matemática, algoritmos, programação e arquitetura de sistemas, o bacharel é preparado para criar soluções inovadoras e escaláveis, dominar tecnologias emergentes e conduzir projetos complexos em ambientes corporativos, acadêmicos ou empreendedores. Essa formação permite atuar com excelência no desenvolvimento de software, engenharia de sistemas, banco de dados, redes, segurança da informação, inteligência artificial, ciência de dados, computação gráfica, realidade virtual, pesquisa aplicada, consultoria, docência e criação de produtos tecnológicos disruptivos. É um perfil versátil, crítico e altamente capacitado para transformar o conhecimento em impacto real no mundo digital.</p>
+      
+      <hr class="linha-diferenciada"> <!-- Linha estilizada para separar conteúdos -->
 
-      <p><strong>Curso Superior ─ Incompleto</strong><br>
+      <p><strong>Curso Superior ─ Incompleto<br>
       Instituição: FEI – Faculdade de Engenharia Industrial<br>
-      Curso: Engenharia Elétrica Eletrônica Industrial com Ênfase em Telecomunicações</p>
+      Curso: Engenharia Elétrica Eletrônica Industrial com Ênfase em Telecomunicações</strong></p>
 
-      <p>O curso abrange diversas áreas relacionadas à informática e eletrônica, incluindo:</p>
-      <ul>
-        <li>Projetos de redes locais e redes ponto a ponto (via satélite)</li>
-        <li>Automação industrial (desenvolvimento e criação)</li>
-        <li>Projetos elétricos de sistemas</li>
-        <li>Ênfase em tecnologias de telecomunicações</li>
-      </ul>
+      <p>O curso de Engenharia Elétrica Eletrônica Industrial com Ênfase em Telecomunicações da FEI destaca-se por sua formação sólida nas áreas de eletrônica, informática e tecnologias de comunicação. Com forte embasamento técnico e científico, capacita o aluno para projetar redes locais e ponto a ponto, inclusive via satélite, além de desenvolver soluções avançadas em automação industrial e sistemas elétricos.
+
+      <hr class="linha-diferenciada"> <!-- Linha estilizada para separar conteúdos -->
+
+      <p><strong>Segundo Grau Técnico<br>
+      Instituição: Escola Politécnica Treinasse<br>
+      Curso: Técnico em Processamento de Dados</strong></p>
+
+      <p>O curso Técnico em Processamento de Dados da Escola Politécnica Treinasse é uma formação estratégica voltada à inovação. Com uma base sólida e aplicada em programação, desenvolvimento de sistemas corporativos e soluções em TI, o curso capacita o aluno para atuar com análise e modelagem de sistemas orientados a negócios. A proposta pedagógica integra teoria e prática, formando profissionais prontos para projetar e implementar tecnologias alinhadas aos desafios e objetivos estratégicos das organizações modernas, com visão de futuro e foco em transformação digital.</p>
+
+      <hr class="linha-diferenciada"> <!-- Linha estilizada para separar conteúdos -->
 
       <h3>Síntese de Qualificações</h3>
       <ul>
-        <li>Técnico em Processamento de Dados, com sólida experiência de mais de 30 anos nas áreas de:
+        <li>Experiência de mais de 30 anos em desenvolvimento de sistemas corporativos e atuação consultiva em soluções de TI alinhadas às necessidades estratégicas das empresas.</li>
+        <li>Especialista em Planejamento Estratégico e Elaboração de Planos de Negócios (Business Plan), com ênfase em:
           <ul>
-            <li>Programação e desenvolvimento de sistemas corporativos.</li>
-            <li>Análise e modelagem de sistemas orientados a negócios.</li>
-            <li>Atuação consultiva em soluções de TI alinhadas às necessidades estratégicas das empresas.</li>
+            <li>Estruturação de novos empreendimentos no setor de tecnologia da informação, utilizando metodologias modernas de planejamento estratégico, modelagem de negócios e viabilidade econômica.</li>
+            <li>Pesquisa de mercado, análise de concorrência, identificação de oportunidades e criação de projetos atrativos para captação de investimentos (Venture Capital e outras fontes).</li>
+            <li>Certificação pelo SEBRAE em elaboração e validação de planos de negócios.</li>
           </ul>
         </li>
         <li>Gestão Administrativa e Empresarial no setor de Tecnologia, Comunicação e Eventos, incluindo:
@@ -288,23 +302,18 @@
             <li>Desenvolvimento de soluções integradas de comunicação e eventos para fortalecimento de imagem institucional.</li>
           </ul>
         </li>
-        <li>Especialista em Planejamento Estratégico e Elaboração de Planos de Negócios (Business Plan), com ênfase em:
-          <ul>
-            <li>Estruturação de novos empreendimentos no setor de tecnologia da informação, utilizando metodologias modernas de planejamento estratégico, modelagem de negócios e viabilidade econômica.</li>
-            <li>Pesquisa de mercado, análise de concorrência, identificação de oportunidades e criação de projetos atrativos para captação de investimentos (Venture Capital e outras fontes).</li>
-            <li>Certificação pelo SEBRAE em elaboração e validação de planos de negócios.</li>
-          </ul>
-        </li>
       </ul>
+      <br><br>
     </section>
 
+    <!-- Seção do Portfólio com exemplos de projetos -->
     <section id="portifolio">
-      <h2 class="titulo-portifolio">Portifólio</h2>
-      <div class="introducao-portifolio">
+      <h2 class="titulo-diferenciado">Portifólio</h2>
+      <div class="introducao-diferenciada">
         <p>Nesta seção, compartilho projetos que refletem minha jornada entre a comunicação, o marketing e a tecnologia — conexões criativas que contam um pouco da minha história.</p>
       </div>
       
-      <h4>INFINITOonline.com - Sem Limites para Você</h4>
+      <h4>INFINITOONLINE.COM</h4>
 
       <img src="iol.jpg" alt="Infinito online" style="width:100%; max-width:800px; margin-bottom:20px;">
 
@@ -313,7 +322,7 @@
       </p>
 
       <p>
-      Este projeto que conduzo, está em fase de validação tecnológica, análise de tendências emergentes e mapeamento de gaps de mercado ainda inexplorados. O foco está em potencializar soluções digitais que vão além do convencional – algumas reimaginando serviços já conhecidos sob uma ótica inovadora e centrada no usuário, outras trazendo propostas inéditas que sequer foram aplicadas no universo online global.
+      Este projeto que conduzo, está em fase de reestruturação tecnológica, análise de tendências emergentes e mapeamento de gaps de mercado ainda inexplorados. O foco está em potencializar soluções digitais que vão além do convencional – algumas reimaginando serviços já conhecidos sob uma ótica inovadora e centrada no usuário, outras trazendo propostas inéditas que sequer foram aplicadas no universo online global.
       </p>
 
       <p>
@@ -330,8 +339,10 @@
           style="position:absolute;top:0;left:0;width:100%;height:100%;" 
           frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <h4>Programa Tudo de Bom</h4>
+      
+      <hr class="linha-diferenciada2"> <!-- Linha estilizada mais alta para separar conteúdos -->
+      
+      <h4>PROGRAMA TUDO DE BOM</h4>
       <img src="Prog_Tudo_de_bom.jpg" alt="Programa Tudo de Bom" style="width:100%; max-width:800px; margin-bottom:20px;">
       <p>
         Entre 2009 e 2010, atuei como produtor do programa Tudo de Bom, transmitido pela VTV. O projeto tinha como proposta principal valorizar cidades de diversos estados brasileiros, explorando seus atrativos turísticos tanto diurnos quanto noturnos.
@@ -349,26 +360,25 @@
         Ao longo dos anos, o programa passou por um reposicionamento editorial e, atualmente, é exibido pela Santa Cecília TV, com foco em um formato de revista feminina de variedades. Sob a direção e produção de Renata Abussafi Queiroga, o programa ampliou seu escopo, abordando temas ligados ao universo feminino, como estilo de vida, beleza, gastronomia, moda e cultura.
       </p>
 
-
-
-      <h4>Programa Tudo de Bom - Analândia/SP</h4>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
         <iframe src="https://www.youtube.com/embed/9buFEae_aPY"
             title="Programa Tudo de Bom" 
             style="position:absolute;top:0;left:0;width:100%;height:100%;" 
             frameborder="0" allowfullscreen></iframe>
       </div>
+      <h4>Programa Tudo de Bom - Analândia/SP</h4>
 
-      <h4>Programa Tudo de Bom - São Paulo, Grease no Show Bar</h4>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
         <iframe src="https://www.youtube.com/embed/jIQ-eJWH-D4"
             title="Programa Tudo de Bom" 
             style="position:absolute;top:0;left:0;width:100%;height:100%;" 
             frameborder="0" allowfullscreen></iframe>
       </div>
-
-
-      <h3>Programa e Site @balada</h3>
+      <h4>Programa Tudo de Bom - São Paulo, Grease no Show Bar</h4>
+      
+      <hr class="linha-diferenciada2"> <!-- Linha estilizada mais alta para separar conteúdos -->
+      
+      <h3>SITE E PROGRAMA @Balada</h3>
 
       <p>
         O site @balada divulgava as Casas Noturnas, Shows e Eventos da Baixada Santista, Litoral Paulista, São Paulo e Interior. Nele, o internauta ficava por dentro de tudo o que acontecia nessas regiões. Um dado importante é que 44% dos acessos eram da Baixada Santista e Litoral Paulista, 47% divide-se entre São Paulo e Interior e 09% vinha de outros estados e alguns países. Com uma estrutura apropriada e  profissionais especializados o site atingiu em um ano, o expressivo número de 6.500.000 de page views.
@@ -383,59 +393,79 @@
       
       <img src="abalada1.jpg" alt="Programa @balada" style="width:100%; max-width:800px; margin-bottom:20px;">
       <img src="abalada2.jpg" alt="Programa @balada" style="width:100%; max-width:800px; margin-bottom:20px;">
-      
-      <h4>A Balada, Lucky Scope - Nova Pista de Techno e SushiBar</h4>
+    
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
         <iframe src="https://www.youtube.com/embed/55GNR17RGEo?start=588" 
                 title="A Balada, Lucky Scope - Nova Pista de Techno e SushiBar" 
                 style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                 frameborder="0" allowfullscreen></iframe>
       </div>
+      <h4>A Balada, Lucky Scope - Nova Pista de Techno e SushiBar</h4>
 
-      <h4>A Balada, Breezy - Festa Smirnoff e Sirena Maresias - Festa do Branco</h4>
       <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin-bottom:20px;">
         <iframe src="https://www.youtube.com/embed/OBj04T-hkok?si=pKxv0_KuYLpwMOIp" 
                 title="A Balada, Breezy - Festa Smirnoff e Sirena Maresias - Festa do Branco" 
                 style="position:absolute;top:0;left:0;width:100%;height:100%;" 
                 frameborder="0" allowfullscreen></iframe>
       </div>
-
-      <img src="programa_horarios.jpg" alt="Programa Horários" style="width:100%; max-width:800px; margin-bottom:20px;">
-      <img src="programa_entrevistas.jpg" alt="Programa Entrevistas" style="width:100%; max-width:800px; margin-bottom:20px;">
-
+      <h4>A Balada, Breezy - Festa Smirnoff e Sirena Maresias - Festa do Branco</h4>
+      <br><br>
 
     </section>
 
+    <!-- Seção de Contato da página - Formulário -->
     <section id="contato">
+      <!-- Imagem decorativa de contato, com largura total ajustada até no máximo 800px -->
       <img src="contato.png" alt="Contato" style="width:100%; max-width:800px; margin-bottom:20px;">
+      <!-- Caixa que envolve o formulário -->
       <div class="form-box">
-        <form action="mailto:jamiljjr@gmail.com" method="post" enctype="text/plain">
-          <label for="nome">Nome:</label>
-          <input type="text" id="nome" name="nome" required>
+        <!-- Início do formulário de contato -->
+        <form action="https://formsubmit.co/jamiljjr@gmail.com" method="POST">
+           <!-- Anti-spam -->
+           <input type="hidden" name="_captcha" value="false">
+           <input type="hidden" name="_subject" value="Nova mensagem do meu portifólio!">
+           <!-- Redirecionamento após envio -->
+           <input type="hidden" name="_next" value="https://jamiljjr.github.io/portifolio/ ">
+          <!-- Início dos Campos de entrada do formulário -->
+           <label for="nome">Nome:</label>
+           <input type="text" id="nome" name="nome" required>
 
-          <label for="email">E-mail:</label>
-          <input type="email" id="email" name="email" required>
+           <label for="email">E-mail:</label>
+           <input type="email" id="email" name="email" required>
 
-          <label for="mensagem">Mensagem:</label>
-          <textarea id="mensagem" name="mensagem" required></textarea>
-
-          <button type="submit">Enviar</button>
+           <label for="mensagem">Mensagem:</label>
+           <textarea id="mensagem" name="mensagem" required></textarea>
+           
+           <!-- Botão para enviar o formulário -->
+           <button type="submit">Enviar</button>
         </form>
       </div>
     </section>
   </div>
 
-  <!-- Script para calcular a idade -->
+  <!-- Script para calcular a idade, para que a minha idade esteja sempre atualizada na seção: "Sobre Mim" -->
   <script>
+    // Função autoexecutável 
     (function() {
+      // Cria um objeto Date com a minha data de nascimento: 13 de março de 1971
       const nascimento = new Date(1971, 2, 13); // Março (mês 2 no JS)
+      // Cria um objeto Date com a data atual
       const hoje = new Date();
+      // Calcula a idade subtraindo o ano atual pelo ano de nascimento
       let idade = hoje.getFullYear() - nascimento.getFullYear();
+      // Cria uma nova data representando o aniversário deste ano
       const aniversarioEsteAno = new Date(hoje.getFullYear(), nascimento.getMonth(), nascimento.getDate());
+      // Verifica se a data atual é anterior ao meu aniversário este ano
+      // Se for, ainda não fiz aniversário, então diminui 1 da idade
       if (hoje < aniversarioEsteAno) idade--;
       document.getElementById("idade").textContent = idade;
     })();
   </script>
+  
+  <!-- Rodapé da página com direitos autorais -->
+  <footer class="footer">
+      <p class="footer-text">© 2025 Copyright  .:.  By Jamil J. Jr.</p>
+  </footer>
 
 </body>
 </html>
